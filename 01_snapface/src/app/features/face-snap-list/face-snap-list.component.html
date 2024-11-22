@@ -1,0 +1,10 @@
+<!-- attribut binding []-->
+<!-- le control flow block  @for  fonctionne un peu comme une boucle  for...of -->
+<!-- le paramètre  track  permet à Angular d'identifier les différents éléments du tableau grâce à une propriété unique — puisque notre modèle FaceSnap n'a pas encore de propriété  id  , on utilisera le  title  comme propriété unique (pour notre exemple simple où l'on sait que c'est le cas !) -->
+@for (faceSnapElement of faceSnaps; track faceSnapElement.title) {
+
+    <app-face-snap [faceSnap]="faceSnapElement"/>
+    <!-- ou -->
+    <!-- <app-face-snap [faceSnap]="faceSnapElement"></app-face-snap> --> 
+
+}

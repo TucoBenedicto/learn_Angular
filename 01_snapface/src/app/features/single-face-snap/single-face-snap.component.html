@@ -1,0 +1,40 @@
+<!--  La directive [ngClass]  permet d'ajouter dynamiquement des classes à des éléments HTML.selon une condition donnée. -->
+<div class="face-snap-card" [ngClass]="{ snapped: userHasSnapped }">
+  <!-- Afficher des variables simple avec les doubles accolades {{ }} : String interpolation -->
+  <!-- utilisation d'un pipe pour modifier/formater le text grace au pipe "|"   -->
+  <h2>{{ faceSnap.title | uppercase }}</h2>
+
+  <!-- Lien pour revenir à  -->
+  <a routerLink="/facesnaps">BACK</a>
+
+  <!-- control block @if -->
+  @if (faceSnap.location) {
+  <p>Localisation : {{ faceSnap.location }}</p>
+  }@else {
+  <p>la localtion n'existe pas</p>
+  }
+
+  <!-- Afficher des variables dans les attributs HTML entre crochets [] : Attribute binding -->
+  <img [src]="faceSnap.imageUrl" [alt]="faceSnap.title" />
+  <p>
+    Mise en ligne le {{ faceSnap.createdAt | date : "d MMMM YYYY à HH:MM" }}
+  </p>
+  <p>{{ faceSnap.description }}</p>
+  <p>
+    <!-- Event :on utilise des parenthèses () pour lier aux événements à la logique (face-snap.component.ts) -->
+    <button (click)="onSnap()">{{ snapButtonText }}</button>
+    <!-- La directive  [ngStyle]  permet d'appliquer des styles css dynamiques (qui dependent de valeur), comme un texte qui, plus il y a de snaps, devient de plus en plus vert. , grace à la fonction css "rgb" -->
+    <span [ngStyle]="{ color: 'rgb(0, ' + faceSnap.snaps + ', 0)' }"
+      >🤌 {{ faceSnap.snaps }}</span
+    >
+  </p>
+
+  <!-- Pipe decimal permettant de d'arrondir une valeur decimal
+  au moins un chiffre pour les entiers ; 
+  minimum 0 chiffres après la virgule – maximum 0 chiffres 
+  (Angular arrondira donc à l'entier le plus proche). -->
+  <span>Nombre : {{ myLargeNumber | number : "1.0-0" }}</span> <br />
+  <span>Pourcentage : {{ myPercentage | percent : "1.2-2" }}</span> <br />
+  <!-- "code" permet d'utiliser "eur" plutot que le symbile "€" -->
+  <span>Argent : {{ myPrice | currency : "EUR" : "code" }}</span> <br />
+</div>

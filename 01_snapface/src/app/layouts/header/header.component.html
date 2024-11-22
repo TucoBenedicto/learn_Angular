@@ -1,0 +1,26 @@
+<header>
+  <h1>snapface</h1>
+  <nav>
+    <!-- Creation de route avec la directive "RouterLink" -->
+    <!-- Comme on peux le constater on n'utiliser certainement pas "<a Href>" pour creer un lien , 
+      on pense à mettre l'attribut vers la route "facesnaps" comme il a etais fait dans "app.routes.ts"-->
+    <a
+      routerLink=""
+      routerLinkActive="active"
+      [routerLinkActiveOptions]="{ exact: true }"
+      >Home</a
+    >
+    <a
+      routerLink="facesnaps"
+      routerLinkActive="active"
+      [routerLinkActiveOptions]="{ exact: true }"
+      >FaceSnaps</a
+    >
+  </nav>
+</header>
+
+<!-- 
+routerLinkActiveOptions
+Problème, on a un bug un peu étrange. Lorsque Home est la route active, il n'y a que son lien qui est souligné, mais lorsqu'on est sur FaceSnaps, les deux liens sont soulignés. Avez-vous une idée d'où ça peut venir ? 
+En fait, une route est considérée comme étant active lorsqu'elle-même ou l'un de ses enfants est la route sélectionnée. On voit bien que  /facesnaps  est un enfant de  /, donc finalement Angular se comporte normalement. Cependant, il existe une configuration qui permet de considérer uniquement la route exacte et non ses enfants. Il suffit d'ajouter : 
+-->
