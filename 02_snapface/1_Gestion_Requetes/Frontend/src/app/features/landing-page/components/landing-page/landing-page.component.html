@@ -1,0 +1,19 @@
+<div class="landing-block">
+
+  <!--  formulaire basique avec les template forms -->
+    <!-- L'événement  ngSubmit  correspond aux clics sur le bouton de type  submit.-->
+    <!-- Envoi de tous le formulaire : -->
+     <!-- Une référence locale, créée avec un dièse  #  comme ci-dessus, permet à Angular d'accéder à l'élément pour, par exemple, l'envoyer comme argument à une méthode comme vous le faites ici. -->
+    <form #emailForm="ngForm" (ngSubmit)="onSubmitForm(emailForm)">
+    <label for="emailInput">Inscrivez-vous pour recevoir notre newsletter !</label>
+    <!-- [(ngModel)] le [()] permet le two way binding  -->
+     <!--  -->
+    <input id="emailInput" name="userEmail" type="email" [(ngModel)]="userEmail">
+    <button type="submit">OK!</button>
+</form>
+
+  <img src="../../../../../assets/snapface.png" alt="Snapface logo">
+  <div class="landing-links">
+    <button (click)="onContinue()">Continuer vers Snapface</button>
+  </div>
+</div>

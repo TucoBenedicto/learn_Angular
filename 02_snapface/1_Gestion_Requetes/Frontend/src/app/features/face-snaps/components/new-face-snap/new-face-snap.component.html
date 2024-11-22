@@ -1,0 +1,40 @@
+<div class="form-card">
+    <h2>NOUVEAU FACESNAP</h2>
+    <!-- Le fait d'avoir importé ReactiveFormsModule vous permet de lier un objet de type FormGroup à un  <form>  avec l'attribut  formGroup  .-->
+    <form [formGroup]="snapForm">
+        <div class="form-group">
+            <label for="title">Titre</label>
+            <!-- Il faut attribuer un  formControlName  à chaque input que vous ajouterez à ce formulaire : ces noms doivent correspondre aux noms des contrôles créés avec FormBuilder : -->
+            <input id="title" type="text" formControlName="title">
+        </div>
+        <div class="form-group">
+            <label for="description">Description</label>
+            <textarea id="description" type="text" formControlName="description" rows="4">
+            </textarea>
+        </div>
+        <div class="form-group">
+            <label for="imageUrl">URL de l'image</label>
+            <input id="imageUrl" type="text" formControlName="imageUrl">
+        </div>
+        <div class="form-group">
+            <label for="location">Lieu</label>
+            <input id="location" type="text" formControlName="location">
+        </div>
+        <div class="action-buttons">
+            <!-- Pour empêcher l'utilisateur d'envoyer le formulaire s'il n'est pas valable, vous pouvez lier l'attribut  disabled  du bouton d'enregistrement à l'attribut  invalid  du FormGroup – si le formulaire n'est pas valable, le bouton sera désactivé. -->
+            <button type="submit" (click)="onSubmitForm()" [disabled]="snapForm.invalid">Enregistrer</button>
+        </div>
+    </form>
+</div>
+
+<!-- on utiliser le pipe  async  pour afficher cet aperçu dans le template : -->
+<!-- le pipe async va souscrire a l'observable "faceSnapPreview$" -->
+<!-- ajoute la  <div>  uniquement lorsque l'Observable émet ; -->
+<!-- as : permet de creer un alias , Cet alias permet de traiter les émissions de l'Observable comme si elles étaient des valeurs fixes. C'est ce qui vous permet d'accéder facilement aux attributs du FaceSnap émis sans avoir à y souscrire de nouveau. -->
+<div class="face-snap-card" *ngIf="faceSnapPreview$ | async as faceSnap">
+    <h2>{{ faceSnap.title | uppercase }}</h2>
+    <p>Mis en ligne {{ faceSnap.createdDate | date: 'à HH:mm, le d MMMM yyyy' }}</p>
+    <img [src]="faceSnap.imageUrl" [alt]="faceSnap.title">
+    <p>{{ faceSnap.description }}</p>
+    <p *ngIf="faceSnap.location">Photo prise à {{ faceSnap.location }}</p>
+</div>

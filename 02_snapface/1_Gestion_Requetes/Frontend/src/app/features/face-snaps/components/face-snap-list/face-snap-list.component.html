@@ -1,0 +1,2 @@
+<!-- on utilise simplement le pipe  async  pour subscribe à notre nouvel Observable – on continue à utiliser  *ngFor ,  car l'Observable émettra des tableaux. -->
+<app-face-snap *ngFor="let faceSnap of faceSnaps$ | async" [faceSnap]="faceSnap"></app-face-snap>
